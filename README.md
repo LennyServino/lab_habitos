@@ -21,13 +21,17 @@ Para lograr el funcionamiento dinámico, toda la lógica reside en el `State` de
 
 A continuación, se muestran los distintos estados clave de la interfaz durante su uso:
 
-| 1. Inicio del Día (P-10) | 2. Progreso Parcial (P-1/P-2) |
+| 1. Inicio del Día (P-10) | 2. Progreso Parcial (P-1) |
 | :---: | :---: |
 | ![Estado Inicial](./capturas/P-10.png) | ![Progreso Parcial](./capturas/P-1.png) |
 
 | 3. Modo Enfoque Activado (P-6) | 4. Día Completado (100%) (P-2) |
 | :---: | :---: |
 | ![Modo Enfoque](./capturas/P-6.png) | ![Día Completado](./capturas/P-2.png) |
+
+| 5. Guardar Nota (P-8) | 6. Rotar dispositivo / abrir teclado (P-12) |
+| :---: | :---: |
+| ![Guardar Nota](./capturas/P-8.png) | ![Rotar Dispositivo](./capturas/P-12.png) |
 
 
 ## 🤔 Reflexión sobre el Manejo del Estado
