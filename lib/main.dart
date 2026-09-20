@@ -114,8 +114,88 @@ class _PanelHabitosState extends State<PanelHabitos> {
           'Hábitos - Cumplidos: $_totalCumplidos / ${_habitos.length}',
         ),
       ),
-      body: const Center(
-        child: Text('TODO: construir la interfaz según los requerimientos'),
+      body: ListView(
+        padding: const EdgeInsets.all(16.0),
+        children: [
+          // 1. Barra de progreso y porcentaje
+          Row(
+            children: [
+              Expanded(
+                child: LinearProgressIndicator(
+                  value: _progreso, // Este valor va de 0.0 a 1.0
+                  minHeight: 10,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Text(
+                '${(_progreso * 100).round()}%',
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+
+          // 2. Mensaje motivacional
+          Center(
+            child: Text(
+              _mensaje,
+              style: const TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.green,
+              ),
+            ),
+          ),
+          const Divider(height: 40),
+
+          // 3. Slider de meta del día
+          Column(
+            children: [
+              Slider(
+                value: _meta.toDouble(),
+                min: 1,
+                max: _habitos.length.toDouble(),
+                divisions: _habitos.length - 1,
+                onChanged: _cambiarMeta,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Meta: $_meta hábitos',
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                  // Muestra el distintivo solo si se alcanza la meta
+                  if (_metaAlcanzada) ...[
+                    const SizedBox(width: 10),
+                    const Chip(
+                      label: Text(
+                        '¡Meta alcanzada!',
+                        style: TextStyle(color: Colors.white, fontSize: 12),
+                      ),
+                      backgroundColor: Colors.green,
+                      padding: EdgeInsets.zero,
+                    ),
+                  ],
+                ],
+              ),
+            ],
+          ),
+          const Divider(height: 40),
+
+          // 4. Switch de Modo enfoque
+          SwitchListTile(
+            title: const Text('Modo enfoque'),
+            subtitle: const Text('Ocultar hábitos completados'),
+            value: _enfoque,
+            onChanged: _alternarEnfoque,
+          ),
+
+          // TODO: Agregar la lista de hábitos
+
+          // TODO: Agregar sección de notas y botón de reinicio
+        ],
       ),
     );
   }
