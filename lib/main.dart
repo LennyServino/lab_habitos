@@ -66,7 +66,6 @@ class _PanelHabitosState extends State<PanelHabitos> {
     return '¡Día completado!';
   }
 
-  // Acciones (TODO: completar con setState)
   // Acciones (Completadas con setState)
   void _alternarHabito(int index) {
     setState(() {
