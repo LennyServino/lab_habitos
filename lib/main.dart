@@ -67,24 +67,43 @@ class _PanelHabitosState extends State<PanelHabitos> {
   }
 
   // Acciones (TODO: completar con setState)
+  // Acciones (Completadas con setState)
   void _alternarHabito(int index) {
-    // TODO
+    setState(() {
+      _cumplidos[index] = !_cumplidos[index]; // Invierte el estado (de true a false o viceversa)
+    });
   }
 
   void _cambiarMeta(double v) {
-    // TODO
+    setState(() {
+      _meta = v.round(); // Convierte el valor decimal del Slider a entero
+    });
   }
 
   void _alternarEnfoque(bool v) {
-    // TODO
+    setState(() {
+      _enfoque = v; // Activa o desactiva el modo enfoque
+    });
   }
 
   void _guardarNota() {
-    // TODO
+    setState(() {
+      _nota = _notaCtrl.text
+          .trim(); // Guarda el texto escrito, quitando espacios extra
+    });
   }
 
   void _reiniciarDia() {
-    // TODO
+    setState(() {
+      _cumplidos = List<bool>.filled(
+        _habitos.length,
+        false,
+      ); // Desmarca todos los hábitos
+      _meta = _metaInicial;
+      _enfoque = false;
+      _nota = '';
+      _notaCtrl.clear();
+    });
   }
 
   @override
