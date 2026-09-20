@@ -192,7 +192,39 @@ class _PanelHabitosState extends State<PanelHabitos> {
             onChanged: _alternarEnfoque,
           ),
 
-          // TODO: Agregar la lista de hábitos
+          // 5. Lista de hábitos
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.0),
+            child: Text(
+              'Tus hábitos de hoy:',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+          ...List.generate(_habitos.length, (index) {
+            // Si el modo enfoque está activado y el hábito ya se cumplió, lo ocultamos
+            if (_enfoque && _cumplidos[index]) {
+              return const SizedBox.shrink(); // Widget vacío (no ocupa espacio)
+            }
+
+            // Si no, mostramos la casilla de verificación
+            return CheckboxListTile(
+              title: Text(
+                _habitos[index],
+                style: TextStyle(
+                  // Tachamos el texto si el hábito está cumplido
+                  decoration: _cumplidos[index]
+                      ? TextDecoration.lineThrough
+                      : null,
+                  color: _cumplidos[index] ? Colors.grey : Colors.black,
+                ),
+              ),
+              value: _cumplidos[index],
+              onChanged: (bool? value) {
+                _alternarHabito(index);
+              },
+            );
+          }),
+          const Divider(height: 40),
 
           // TODO: Agregar sección de notas y botón de reinicio
         ],
