@@ -226,7 +226,73 @@ class _PanelHabitosState extends State<PanelHabitos> {
           }),
           const Divider(height: 40),
 
-          // TODO: Agregar sección de notas y botón de reinicio
+          // 6. Sección de notas
+          const Text(
+            'Nota del día:',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: _notaCtrl,
+                  decoration: const InputDecoration(
+                    hintText: '¿Cómo te fue hoy?',
+                    border: OutlineInputBorder(),
+                    isDense:
+                        true, // Hace el campo de texto un poco más compacto
+                  ),
+                  onSubmitted: (_) =>
+                      _guardarNota(), // Guarda al presionar Enter en el teclado
+                ),
+              ),
+              const SizedBox(width: 8),
+              ElevatedButton(
+                onPressed: _guardarNota,
+                child: const Text('Guardar'),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+
+          // Tarjeta donde se muestra la nota guardada
+          Card(
+            color: Colors.green.shade50,
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(color: Colors.green.shade200),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                _nota.isEmpty ? 'Sin nota' : _nota,
+                style: TextStyle(
+                  fontStyle: _nota.isEmpty
+                      ? FontStyle.italic
+                      : FontStyle.normal,
+                  color: _nota.isEmpty ? Colors.grey : Colors.black87,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 32),
+
+          // 7. Botón Reiniciar Día
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed: _reiniciarDia,
+              icon: const Icon(Icons.refresh),
+              label: const Text('Reiniciar día'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red.shade50,
+                foregroundColor: Colors.red.shade900,
+                padding: const EdgeInsets.symmetric(vertical: 12),
+              ),
+            ),
+          ),
         ],
       ),
     );
